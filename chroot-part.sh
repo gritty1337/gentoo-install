@@ -454,12 +454,12 @@ while grep -qs "^[^A-Za-z0-9_]" <<< "$bootdevs"; do
 done
 
 if [ "$BOOTLOADER" == "" ]; then
-    BOOTLOADER=grub2
+    BOOTLOADER=refind
 fi
 case $BOOTLOADER in
-    grub2)
-        echo ------ Using GRUB2
-        emerge_with_autounmask sys-boot/grub:2
+    refind)
+        echo ------ Using refind
+        emerge_with_autounmask sys-boot/refind
 
         # Some versions of XenServer has problems with graphical GRUB menu
         # https://serverfault.com/questions/598668/vms-grub-menu-invisible-with-xenserver-6-0-2
@@ -468,12 +468,11 @@ case $BOOTLOADER in
         while read -u 3 bootdev; do
             disklabel_type="$(fdisk -l /dev/$bootdev | grep "Disklabel type" | cut -d ' ' -f 3)"
             if [ "$disklabel_type" == "gpt" ] && [ -d /sys/firmware/efi ]; then
-                grub-install --target=x86_64-efi --efi-directory=/boot
+                refind-install
             else
                 grub-install /dev/$bootdev
             fi
         done 3<<< "$bootdevs"
-        grub-mkconfig -o /boot/grub/grub.cfg
     ;;
     grub-legacy)
         echo ------ Using GRUB Legacy

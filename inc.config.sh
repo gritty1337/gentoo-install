@@ -5,17 +5,10 @@ COMMON_FLAGS="-march=native -O2 -pipe"
 #COMMON_FLAGS="-march=native -O2 -pipe -ggdb -fno-omit-frame-pointer"
 #CFLAGS="\${COMMON_FLAGS}"
 #CXXFLAGS="\${COMMON_FLAGS}"
-USE="-bindist -X vim-syntax"
+USE="pulseaudio bluetooth X"
 
 # optional make.conf settings (leave blank for defaults)
-http_proxy=""
-FEATURES="preserve-libs"
-#FEATURES="preserve-libs splitdebug installsources"
-CPU_FLAGS_X86="mmx sse sse2"
-INPUT_DEVICES=""
-VIDEO_CARDS=""
-LINGUAS=""
-L10N=""
+
 
 LIBREOFFICE_EXTENSIONS=""
 NGINX_MODULES_HTTP=""
@@ -26,13 +19,12 @@ QEMU_USER_TARGETS=""
 # System profile - leave blank to use installation CD default one
 #SYSTEM_PROFILE=""
 
-TIMEZONE="Europe/Riga"
+TIMEZONE="UTC"
 
 LOCALES="
     en_US ISO-8859-1
     en_US.UTF-8 UTF-8
-    lv_LV ISO-8859-13
-    lv_LV.UTF-8 UTF-8
+    ru_RU.UTF-8 UTF-8
 "
 DEFAULT_LOCALE="POSIX"
 
@@ -68,8 +60,8 @@ TARGET_HOSTNAME="tux-box-\`ifconfig -a | grep ether | head -n 1 | sed 's/\s\+/\t
 # Strings beginning with '$' will be treated as /etc/shadow hashes instead of plaintext passwords.
 ROOT_PASSWORD=""
 
-USER_LOGIN="larry"
-USER_PASSWORD="somepass"
+USER_LOGIN="gritty"
+USER_PASSWORD="12345678"
 USER_GROUPS="users,wheel"
 
 # Allow members of wheel group to execute any command using sudo. Change to "1" to enable.
@@ -124,7 +116,7 @@ SYSTEM_TOOLS="
 "
 
 # Supported bootloaders: grub2, grub-legacy
-BOOTLOADER="grub2"
+BOOTLOADER="refind"
 
 # Scripts to add to /etc/local.d/, useful for post-install actions on a first boot.
 RC_LOCAL_SCRIPTS=""
